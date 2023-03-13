@@ -86,34 +86,34 @@ services:
     db_$uuid:
         image: mysql:5.7
         command:
-        - --default_authentication_plugin=mysql_native_password
-        - --character-set-server=utf8mb4
-        - --collation-server=utf8mb4_unicode_ci
+            - --default_authentication_plugin=mysql_native_password
+            - --character-set-server=utf8mb4
+            - --collation-server=utf8mb4_unicode_ci
         ports:
-        - $db_port:3306
+            - $db_port:3306
         volumes:
-        - db_data_$uuid:/var/lib/mysql
+            - db_data_$uuid:/var/lib/mysql
         restart: always
         environment:
-        MYSQL_ROOT_PASSWORD: $db_password
-        MYSQL_DATABASE: wordpress
-        MYSQL_USER: wordpress
-        MYSQL_PASSWORD: $db_password
-        WORDPRESS_WPLANG: zh-CN
+            MYSQL_ROOT_PASSWORD: $db_password
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: $db_password
+            WORDPRESS_WPLANG: zh-CN
     wordpress_$uuid:
         depends_on:
-        - db_$uuid
+            - db_$uuid
         # image: wordpress:latest
         image: wordpress:php7.4-apache
         ports:
-        - $wordpress_port:80
+            - $wordpress_port:80
         restart: always
         volumes:
-        - wordpress_data_$uuid:/var/www/html/wp-content
+            - wordpress_data_$uuid:/var/www/html/wp-content
         environment:
-        WORDPRESS_DB_HOST: db_$uuid:3306
-        WORDPRESS_DB_USER: wordpress
-        WORDPRESS_DB_PASSWORD: $db_password
+            WORDPRESS_DB_HOST: db_$uuid:3306
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: $db_password
 volumes:
     db_data_$uuid:
     wordpress_data_$uuid:
