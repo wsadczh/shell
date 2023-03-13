@@ -82,7 +82,7 @@ install_wordpress() {
     filename="wordpress.yml"
     cat >$filename <<EOF
 version: "3"
-    services:
+services:
     db_$uuid:
         image: mysql:5.7
         command:
@@ -114,9 +114,9 @@ version: "3"
         WORDPRESS_DB_HOST: db_$uuid:3306
         WORDPRESS_DB_USER: wordpress
         WORDPRESS_DB_PASSWORD: $db_password
-    volumes:
-        db_data_$uuid:
-        wordpress_data_$uuid:
+volumes:
+    db_data_$uuid:
+    wordpress_data_$uuid:
 EOF
     echo "启动命令"
     echo "docker-compose -f $filename up -d"
